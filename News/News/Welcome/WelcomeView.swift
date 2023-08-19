@@ -12,7 +12,6 @@ class WelcomeView: UIView {
     
     let welcomeBackgroundImage = UIImageView()
     let welcomeParagraph = UILabel()
-    let button = UIButton()
     
     private var originalButtonTransform: CGAffineTransform = .identity
     
@@ -53,30 +52,15 @@ extension WelcomeView {
         attributedString.addAttribute(.kern, value: letterSpacing, range: NSRange(location: 0, length: attributedString.length))
         welcomeParagraph.attributedText = attributedString
 
-        button.setTitle("Continue", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .white
-
-        let buttonTitleAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Inter-Medium", size: 14) ?? UIFont.systemFont(ofSize: 16),
-            .foregroundColor: UIColor.black
-        ]
-
-        let attributedTitle = NSAttributedString(string: "Continue", attributes: buttonTitleAttributes)
-        button.setAttributedTitle(attributedTitle, for: .normal)
-        button.layer.cornerRadius = 8
-        button.addTarget(self, action: #selector(animateButton), for: .touchUpInside)
     }
 
     
     func layout() {
         addSubview(welcomeBackgroundImage)
         addSubview(welcomeParagraph)
-        addSubview(button)
         
         welcomeBackgroundImage.translatesAutoresizingMaskIntoConstraints = false
         welcomeParagraph.translatesAutoresizingMaskIntoConstraints = false
-        button.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             welcomeBackgroundImage.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -88,29 +72,9 @@ extension WelcomeView {
         
         NSLayoutConstraint.activate([
             welcomeParagraph.centerXAnchor.constraint(equalTo: centerXAnchor),
-            welcomeParagraph.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -48),
+            welcomeParagraph.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -164),
             welcomeParagraph.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
             welcomeParagraph.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32)
         ])
-        
-        NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 72),
-            button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -72),
-            button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -72),
-            button.heightAnchor.constraint(equalToConstant: 42)
-        ])
-    }
-    
-    @objc func animateButton() {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.button.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }) { _ in
-            UIView.animate(withDuration: 0.1) {
-                self.button.transform = CGAffineTransform.identity
-            }
-        }
-        print("Tapped")
     }
 }
-
-

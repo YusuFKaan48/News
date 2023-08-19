@@ -16,6 +16,8 @@
 		D24898E42A8F82000084C545 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D24898DB2A8F82000084C545 /* Inter-Medium.ttf */; };
 		D24898E62A8F82000084C545 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D24898DD2A8F82000084C545 /* Inter-Bold.ttf */; };
 		D24898EB2A8F83EA0084C545 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D24898EA2A8F83EA0084C545 /* Inter-Regular.ttf */; };
+		D24898F02A8FAA520084C545 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898EF2A8FAA520084C545 /* OnboardingViewController.swift */; };
+		D24898F22A8FAC920084C545 /* OnboardingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898F12A8FAC920084C545 /* OnboardingContainerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		D24898DB2A8F82000084C545 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Medium.ttf"; path = "../../Downloads/Inter/static/Inter-Medium.ttf"; sourceTree = "<group>"; };
 		D24898DD2A8F82000084C545 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Bold.ttf"; path = "../../Downloads/Inter/static/Inter-Bold.ttf"; sourceTree = "<group>"; };
 		D24898EA2A8F83EA0084C545 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Regular.ttf"; path = "../../Downloads/Inter/static/Inter-Regular.ttf"; sourceTree = "<group>"; };
+		D24898EF2A8FAA520084C545 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		D24898F12A8FAC920084C545 /* OnboardingContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,12 +69,10 @@
 		D24898AA2A8F47BB0084C545 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				D24898BF2A8F4A190084C545 /* Welcome */,
 				D24898AB2A8F47BB0084C545 /* AppDelegate.swift */,
-				D24898AF2A8F47BB0084C545 /* ViewController.swift */,
-				D24898B42A8F47BD0084C545 /* Assets.xcassets */,
-				D24898B62A8F47BD0084C545 /* LaunchScreen.storyboard */,
-				D24898B92A8F47BD0084C545 /* Info.plist */,
+				D24898BF2A8F4A190084C545 /* Welcome */,
+				D24898EE2A8FA9EA0084C545 /* Onboarding */,
+				D24898F32A90A92B0084C545 /* Files */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -82,6 +84,26 @@
 				D24898C22A8F4A540084C545 /* WelcomeView.swift */,
 			);
 			path = Welcome;
+			sourceTree = "<group>";
+		};
+		D24898EE2A8FA9EA0084C545 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				D24898EF2A8FAA520084C545 /* OnboardingViewController.swift */,
+				D24898F12A8FAC920084C545 /* OnboardingContainerViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		D24898F32A90A92B0084C545 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				D24898AF2A8F47BB0084C545 /* ViewController.swift */,
+				D24898B42A8F47BD0084C545 /* Assets.xcassets */,
+				D24898B62A8F47BD0084C545 /* LaunchScreen.storyboard */,
+				D24898B92A8F47BD0084C545 /* Info.plist */,
+			);
+			name = Files;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,7 +180,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D24898C12A8F4A3B0084C545 /* WelcomeViewController.swift in Sources */,
+				D24898F22A8FAC920084C545 /* OnboardingContainerViewController.swift in Sources */,
 				D24898B02A8F47BB0084C545 /* ViewController.swift in Sources */,
+				D24898F02A8FAA520084C545 /* OnboardingViewController.swift in Sources */,
 				D24898AC2A8F47BB0084C545 /* AppDelegate.swift in Sources */,
 				D24898C32A8F4A540084C545 /* WelcomeView.swift in Sources */,
 			);
