@@ -18,6 +18,10 @@
 		D24898EB2A8F83EA0084C545 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D24898EA2A8F83EA0084C545 /* Inter-Regular.ttf */; };
 		D24898F02A8FAA520084C545 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898EF2A8FAA520084C545 /* OnboardingViewController.swift */; };
 		D24898F22A8FAC920084C545 /* OnboardingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898F12A8FAC920084C545 /* OnboardingContainerViewController.swift */; };
+		D24898F62A90D02D0084C545 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898F52A90D02D0084C545 /* MainViewController.swift */; };
+		D24898F82A90D10F0084C545 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898F72A90D10F0084C545 /* HomeViewController.swift */; };
+		D24898FA2A90D1280084C545 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898F92A90D1280084C545 /* SearchViewController.swift */; };
+		D24898FC2A90D3170084C545 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898FB2A90D3170084C545 /* UIViewController+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		D24898EA2A8F83EA0084C545 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Inter-Regular.ttf"; path = "../../Downloads/Inter/static/Inter-Regular.ttf"; sourceTree = "<group>"; };
 		D24898EF2A8FAA520084C545 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		D24898F12A8FAC920084C545 /* OnboardingContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerViewController.swift; sourceTree = "<group>"; };
+		D24898F52A90D02D0084C545 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D24898F72A90D10F0084C545 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D24898F92A90D1280084C545 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		D24898FB2A90D3170084C545 /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,7 @@
 				D24898AB2A8F47BB0084C545 /* AppDelegate.swift */,
 				D24898BF2A8F4A190084C545 /* Welcome */,
 				D24898EE2A8FA9EA0084C545 /* Onboarding */,
+				D24898F42A90D00E0084C545 /* Main */,
 				D24898F32A90A92B0084C545 /* Files */,
 			);
 			path = News;
@@ -104,6 +113,17 @@
 				D24898B92A8F47BD0084C545 /* Info.plist */,
 			);
 			name = Files;
+			sourceTree = "<group>";
+		};
+		D24898F42A90D00E0084C545 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D24898F52A90D02D0084C545 /* MainViewController.swift */,
+				D24898F72A90D10F0084C545 /* HomeViewController.swift */,
+				D24898F92A90D1280084C545 /* SearchViewController.swift */,
+				D24898FB2A90D3170084C545 /* UIViewController+Utils.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,7 +199,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D24898F62A90D02D0084C545 /* MainViewController.swift in Sources */,
+				D24898FA2A90D1280084C545 /* SearchViewController.swift in Sources */,
+				D24898F82A90D10F0084C545 /* HomeViewController.swift in Sources */,
 				D24898C12A8F4A3B0084C545 /* WelcomeViewController.swift in Sources */,
+				D24898FC2A90D3170084C545 /* UIViewController+Utils.swift in Sources */,
 				D24898F22A8FAC920084C545 /* OnboardingContainerViewController.swift in Sources */,
 				D24898B02A8F47BB0084C545 /* ViewController.swift in Sources */,
 				D24898F02A8FAA520084C545 /* OnboardingViewController.swift in Sources */,

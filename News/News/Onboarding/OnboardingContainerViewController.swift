@@ -132,6 +132,7 @@ extension OnboardingContainerViewController {
     @objc func closeTapped(_ sender: UIButton) {
         self.delegate?.didFinishOnboarding()
         print("Tapped in onboarding screen")
+        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = MainViewController()
     }
 }
 
