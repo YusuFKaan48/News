@@ -22,6 +22,9 @@
 		D24898F82A90D10F0084C545 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898F72A90D10F0084C545 /* HomeViewController.swift */; };
 		D24898FA2A90D1280084C545 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898F92A90D1280084C545 /* SearchViewController.swift */; };
 		D24898FC2A90D3170084C545 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898FB2A90D3170084C545 /* UIViewController+Utils.swift */; };
+		D24898FE2A91E65E0084C545 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898FD2A91E65E0084C545 /* CellView.swift */; };
+		D24899002A91E77C0084C545 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898FF2A91E77C0084C545 /* ListView.swift */; };
+		D24899022A91F2C70084C545 /* ListUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24899012A91F2C70084C545 /* ListUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		D24898F72A90D10F0084C545 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D24898F92A90D1280084C545 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D24898FB2A90D3170084C545 /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
+		D24898FD2A91E65E0084C545 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		D24898FF2A91E77C0084C545 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		D24899012A91F2C70084C545 /* ListUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,11 +125,30 @@
 			isa = PBXGroup;
 			children = (
 				D24898F52A90D02D0084C545 /* MainViewController.swift */,
-				D24898F72A90D10F0084C545 /* HomeViewController.swift */,
-				D24898F92A90D1280084C545 /* SearchViewController.swift */,
 				D24898FB2A90D3170084C545 /* UIViewController+Utils.swift */,
+				D24899052A922B2E0084C545 /* Home */,
+				D24899062A922B4C0084C545 /* Search */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		D24899052A922B2E0084C545 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D24898F72A90D10F0084C545 /* HomeViewController.swift */,
+				D24899012A91F2C70084C545 /* ListUpView.swift */,
+				D24898FF2A91E77C0084C545 /* ListView.swift */,
+				D24898FD2A91E65E0084C545 /* CellView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		D24899062A922B4C0084C545 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				D24898F92A90D1280084C545 /* SearchViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,13 +224,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D24898FE2A91E65E0084C545 /* CellView.swift in Sources */,
 				D24898F62A90D02D0084C545 /* MainViewController.swift in Sources */,
 				D24898FA2A90D1280084C545 /* SearchViewController.swift in Sources */,
 				D24898F82A90D10F0084C545 /* HomeViewController.swift in Sources */,
+				D24899022A91F2C70084C545 /* ListUpView.swift in Sources */,
 				D24898C12A8F4A3B0084C545 /* WelcomeViewController.swift in Sources */,
 				D24898FC2A90D3170084C545 /* UIViewController+Utils.swift in Sources */,
 				D24898F22A8FAC920084C545 /* OnboardingContainerViewController.swift in Sources */,
 				D24898B02A8F47BB0084C545 /* ViewController.swift in Sources */,
+				D24899002A91E77C0084C545 /* ListView.swift in Sources */,
 				D24898F02A8FAA520084C545 /* OnboardingViewController.swift in Sources */,
 				D24898AC2A8F47BB0084C545 /* AppDelegate.swift in Sources */,
 				D24898C32A8F4A540084C545 /* WelcomeView.swift in Sources */,

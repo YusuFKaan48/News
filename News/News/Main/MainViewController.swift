@@ -8,7 +8,7 @@
 import UIKit
 
 class MainViewController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -35,6 +35,9 @@ class MainViewController: UITabBarController {
         let tabBarList = [homeyNC, searchNC]
 
         viewControllers = tabBarList
+        
+        view.backgroundColor = .init(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
+     //   view.backgroundColor = .gray
     }
 
     private func hideNavigationBarLine(_ navigationBar: UINavigationBar) {
@@ -73,7 +76,7 @@ class MainViewController: UITabBarController {
         UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, for: .selected)
         UITabBarItem.appearance().setTitleTextAttributes(unselectedAttributes, for: .normal)
         
-        let iconSize = CGSize(width: 24, height: 24)
+        let iconSize = CGSize(width: 16, height: 16)
         for item in tabBar.items ?? [] {
             item.image = item.image?.resize(targetSize: iconSize)
         }
