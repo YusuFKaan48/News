@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D205FC692A94B24800398C0B /* ApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205FC682A94B24800398C0B /* ApiCall.swift */; };
 		D24898AC2A8F47BB0084C545 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898AB2A8F47BB0084C545 /* AppDelegate.swift */; };
 		D24898B02A8F47BB0084C545 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898AF2A8F47BB0084C545 /* ViewController.swift */; };
 		D24898B52A8F47BD0084C545 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24898B42A8F47BD0084C545 /* Assets.xcassets */; };
@@ -23,11 +24,12 @@
 		D24898FA2A90D1280084C545 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898F92A90D1280084C545 /* SearchViewController.swift */; };
 		D24898FC2A90D3170084C545 /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898FB2A90D3170084C545 /* UIViewController+Utils.swift */; };
 		D24898FE2A91E65E0084C545 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898FD2A91E65E0084C545 /* CellView.swift */; };
-		D24899002A91E77C0084C545 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898FF2A91E77C0084C545 /* ListView.swift */; };
+		D24899002A91E77C0084C545 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24898FF2A91E77C0084C545 /* ListViewController.swift */; };
 		D24899022A91F2C70084C545 /* ListUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24899012A91F2C70084C545 /* ListUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D205FC682A94B24800398C0B /* ApiCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCall.swift; sourceTree = "<group>"; };
 		D24898A82A8F47BB0084C545 /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24898AB2A8F47BB0084C545 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D24898AF2A8F47BB0084C545 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,7 +48,7 @@
 		D24898F92A90D1280084C545 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D24898FB2A90D3170084C545 /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		D24898FD2A91E65E0084C545 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
-		D24898FF2A91E77C0084C545 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		D24898FF2A91E77C0084C545 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		D24899012A91F2C70084C545 /* ListUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D205FC672A94B15500398C0B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D205FC682A94B24800398C0B /* ApiCall.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		D248989F2A8F47BB0084C545 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +137,7 @@
 				D24898F52A90D02D0084C545 /* MainViewController.swift */,
 				D24898FB2A90D3170084C545 /* UIViewController+Utils.swift */,
 				D24899052A922B2E0084C545 /* Home */,
+				D205FC672A94B15500398C0B /* Networking */,
 				D24899062A922B4C0084C545 /* Search */,
 			);
 			path = Main;
@@ -137,7 +148,7 @@
 			children = (
 				D24898F72A90D10F0084C545 /* HomeViewController.swift */,
 				D24899012A91F2C70084C545 /* ListUpView.swift */,
-				D24898FF2A91E77C0084C545 /* ListView.swift */,
+				D24898FF2A91E77C0084C545 /* ListViewController.swift */,
 				D24898FD2A91E65E0084C545 /* CellView.swift */,
 			);
 			path = Home;
@@ -233,7 +244,8 @@
 				D24898FC2A90D3170084C545 /* UIViewController+Utils.swift in Sources */,
 				D24898F22A8FAC920084C545 /* OnboardingContainerViewController.swift in Sources */,
 				D24898B02A8F47BB0084C545 /* ViewController.swift in Sources */,
-				D24899002A91E77C0084C545 /* ListView.swift in Sources */,
+				D24899002A91E77C0084C545 /* ListViewController.swift in Sources */,
+				D205FC692A94B24800398C0B /* ApiCall.swift in Sources */,
 				D24898F02A8FAA520084C545 /* OnboardingViewController.swift in Sources */,
 				D24898AC2A8F47BB0084C545 /* AppDelegate.swift in Sources */,
 				D24898C32A8F4A540084C545 /* WelcomeView.swift in Sources */,
@@ -386,6 +398,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Me.News;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -412,6 +425,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Me.News;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -28,7 +28,7 @@ class ListUpView: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 200, height: 200)
+        return CGSize(width: 200, height: 24)
     }
 }
 
@@ -89,6 +89,10 @@ extension ListUpView {
         UpListhStack.addArrangedSubview(newsFilterButton)
         UpListSecondhStack.addArrangedSubview(newsMainTitle)
         UpListSecondhStack.addArrangedSubview(newsFromButton)
+        
+        UpListhStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        UpListhStack.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         
            let minWidthConstraint = newsFilterButton.widthAnchor.constraint(equalToConstant: 24)
