@@ -12,12 +12,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     let tableView = UITableView()
     let cellReuseIdentifier = "CellReuseIdentifier"
-    
     var articles: [Article] = []
+    let activityIndicatorView = UIActivityIndicatorView(style: .large)
+    let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupTableView()
         fetchArticles()
     }
@@ -40,16 +40,32 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         tableView.delegate = self
         tableView.dataSource = self
-        
-        tableView.rowHeight = 96
-        tableView.layer.cornerRadius = 4
+        tableView.rowHeight = 106
+        tableView.layer.cornerRadius = 8
         tableView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.04)
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        tableView.separatorColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.2)
 
         tableView.register(CellView.self, forCellReuseIdentifier: cellReuseIdentifier)
+        tableView.selectionFollowsFocus = false
+
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicatorView.startAnimating()
+
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 16
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -58,11 +74,15 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let article = articles[indexPath.row]
         cell.configure(with: article)
         
+        let selectedBackgroundView = UIView()
+        selectedBackgroundView.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
+        cell.selectedBackgroundView = selectedBackgroundView
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
+        tableView.deselectRow(at: indexPath, animated: true)
         let article = articles[indexPath.row]
         
         guard let urlString = article.url, let url = URL(string: urlString) else {
@@ -80,6 +100,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+    @objc func refreshTable() {
+        fetchArticles()
+    }
+
     func fetchArticles() {
         ApiCall.shared.getTopStories { [weak self] result in
             switch result {
@@ -87,9 +111,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self?.articles = articles
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
+                    self?.activityIndicatorView.stopAnimating()
+                    self?.activityIndicatorView.removeFromSuperview()
+                    self?.refreshControl.endRefreshing()
                 }
             case .failure(let error):
                 print("Error fetching articles:", error)
+                self?.refreshControl.endRefreshing()
             }
         }
     }

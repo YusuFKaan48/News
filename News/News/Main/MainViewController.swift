@@ -36,8 +36,7 @@ class MainViewController: UITabBarController {
 
         viewControllers = tabBarList
         
-        view.backgroundColor = .init(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
-     //   view.backgroundColor = .gray
+        view.backgroundColor = .black
     }
 
     private func hideNavigationBarLine(_ navigationBar: UINavigationBar) {
@@ -50,7 +49,7 @@ class MainViewController: UITabBarController {
     private func setupTabBar() {
         tabBar.tintColor = .white
         tabBar.unselectedItemTintColor = .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
-        tabBar.backgroundColor = .init(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
+        tabBar.backgroundColor = .black
         tabBar.isTranslucent = false
 
         guard let customFont = UIFont(name: "Inter-Bold", size: 13) else {

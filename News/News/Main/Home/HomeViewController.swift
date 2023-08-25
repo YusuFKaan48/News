@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
     }
 
     private func style() {
-        view.backgroundColor = .init(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
+        view.backgroundColor = .black
 
         if let customFont = UIFont(name: "Inter-Bold", size: 16) {
             homeText.font = customFont

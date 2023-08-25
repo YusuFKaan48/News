@@ -40,12 +40,13 @@ class CellView: UITableViewCell {
         vStack.addArrangedSubview(newsTitle)
         vStack.addArrangedSubview(newsParagraph)
 
-        newsTitle.font = UIFont(name: "Inter-Medium", size: 12)
+        newsTitle.font = UIFont(name: "Inter-Medium", size: 14)
         newsTitle.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.8)
+        newsTitle.numberOfLines = 2
 
         newsParagraph.font = UIFont(name: "Inter-Medium", size: 12)
         newsParagraph.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
-        newsParagraph.numberOfLines = 3
+        newsParagraph.numberOfLines = 2
         
         newsTitle.setContentCompressionResistancePriority(.required, for: .vertical)
         newsParagraph.setContentCompressionResistancePriority(.required, for: .vertical)
