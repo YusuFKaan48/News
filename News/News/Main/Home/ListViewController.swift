@@ -28,20 +28,23 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func setupTableView() {
-        view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
 
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
+        let listUpView = ListUpView()
+        tableView.tableHeaderView = listUpView
 
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 106
         tableView.layer.cornerRadius = 8
+        tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        tableView.layer.masksToBounds = true
         tableView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.04)
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -63,33 +66,29 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 16
-    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! CellView
-        
+
         let article = articles[indexPath.row]
         cell.configure(with: article)
-        
+
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
         cell.selectedBackgroundView = selectedBackgroundView
-        
+
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let article = articles[indexPath.row]
-        
+
         guard let urlString = article.url, let url = URL(string: urlString) else {
             print("Empty or invalid URL")
             return
         }
-        
+
         if let encodedUrlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let searchURL = URL(string: "\(encodedUrlString)") {
             if UIApplication.shared.canOpenURL(searchURL) {

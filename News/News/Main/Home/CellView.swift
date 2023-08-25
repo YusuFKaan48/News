@@ -76,10 +76,8 @@ class CellView: UITableViewCell {
             hStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             hStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             
-            vStack.topAnchor.constraint(equalTo: hStack.topAnchor),
             vStack.leadingAnchor.constraint(equalTo: newsImage.trailingAnchor, constant: 12),
-            vStack.trailingAnchor.constraint(equalTo: hStack.trailingAnchor),
-            vStack.bottomAnchor.constraint(equalTo: hStack.bottomAnchor),
+           
             
         newsImage.widthAnchor.constraint(equalToConstant: 80),
         ])

@@ -9,7 +9,6 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    let listUpView = ListUpView()
     let listViewController = ListViewController()
     let homeText = UILabel()
 
@@ -17,26 +16,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         style()
         layout()
-
-        loadNews()
     }
-
-    private func loadNews() {
-        ApiCall.shared.getTopStories { [weak self] result in
-            switch result {
-            case .success(let articles):
-                DispatchQueue.main.async {
-                    self?.listViewController.articles = articles
-                    self?.listViewController.tableView.reloadData()
-                }
-            case .failure(let error):
-                print("News fetch error: \(error)")
-            }
-        }
-    }
-
+    
     private func style() {
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
 
         if let customFont = UIFont(name: "Inter-Bold", size: 16) {
             homeText.font = customFont
@@ -51,11 +34,9 @@ class HomeViewController: UIViewController {
 
     private func layout() {
         view.addSubview(homeText)
-        view.addSubview(listUpView)
         view.addSubview(listViewController.view)
 
         homeText.translatesAutoresizingMaskIntoConstraints = false
-        listUpView.translatesAutoresizingMaskIntoConstraints = false
         listViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -64,16 +45,10 @@ class HomeViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            listUpView.topAnchor.constraint(equalTo: homeText.bottomAnchor, constant: 32),
-            listUpView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            listUpView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
-        ])
-
-        NSLayoutConstraint.activate([
-            listViewController.view.topAnchor.constraint(equalTo: listUpView.bottomAnchor, constant: 16),
+            listViewController.view.topAnchor.constraint(equalTo: homeText.bottomAnchor, constant: 16),
             listViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             listViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            listViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16)
+            listViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }

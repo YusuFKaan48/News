@@ -21,8 +21,7 @@ class MainViewController: UITabBarController {
         
         let homeIcon = UIImage(named: "home-simple")
         let searchIcon = UIImage(named: "search")
-
-
+        
         homeVC.setTabBarImage(icon: homeIcon, title: "Home")
         searchVC.setTabBarImage(icon: searchIcon, title: "Search")
 
@@ -36,7 +35,7 @@ class MainViewController: UITabBarController {
 
         viewControllers = tabBarList
         
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
     }
 
     private func hideNavigationBarLine(_ navigationBar: UINavigationBar) {
@@ -47,39 +46,53 @@ class MainViewController: UITabBarController {
     }
 
     private func setupTabBar() {
-        tabBar.tintColor = .white
-        tabBar.unselectedItemTintColor = .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
-        tabBar.backgroundColor = .black
-        tabBar.isTranslucent = false
+            tabBar.tintColor = .white
+            tabBar.unselectedItemTintColor = .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
+            tabBar.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
+            tabBar.isTranslucent = false
 
-        guard let customFont = UIFont(name: "Inter-Bold", size: 13) else {
-            fatalError("Özel font yüklenemedi.")
+            guard let customFont = UIFont(name: "Inter-Bold", size: 13) else {
+                fatalError("Özel font yüklenemedi.")
+            }
+
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: customFont,
+                .foregroundColor: UIColor.white
+            ]
+
+            let selectedAttributes: [NSAttributedString.Key: Any] = [
+                .font: customFont,
+                .foregroundColor: UIColor.white
+            ]
+
+            let unselectedAttributes: [NSAttributedString.Key: Any] = [
+                .font: customFont,
+                .foregroundColor: UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
+            ]
+
+            UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
+            UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, for: .selected)
+            UITabBarItem.appearance().setTitleTextAttributes(unselectedAttributes, for: .normal)
+            
+            let iconSize = CGSize(width: 20, height: 20)
+            for item in tabBar.items ?? [] {
+                item.image = item.image?.resize(targetSize: iconSize)
+            }
+            
+            let bottomLineView = UIView()
+            bottomLineView.backgroundColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.2)
+            bottomLineView.translatesAutoresizingMaskIntoConstraints = false
+            tabBar.addSubview(bottomLineView)
+
+            NSLayoutConstraint.activate([
+                bottomLineView.topAnchor.constraint(equalTo: tabBar.topAnchor),
+                bottomLineView.leadingAnchor.constraint(equalTo: tabBar.leadingAnchor),
+                bottomLineView.trailingAnchor.constraint(equalTo: tabBar.trailingAnchor),
+                bottomLineView.heightAnchor.constraint(equalToConstant: 1)
+            ])
+            
+            tabBar.bringSubviewToFront(bottomLineView)
         }
-
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: customFont,
-            .foregroundColor: UIColor.white
-        ]
-
-        let selectedAttributes: [NSAttributedString.Key: Any] = [
-            .font: customFont,
-            .foregroundColor: UIColor.white
-        ]
-
-        let unselectedAttributes: [NSAttributedString.Key: Any] = [
-            .font: customFont,
-            .foregroundColor: UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
-        ]
-
-        UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, for: .selected)
-        UITabBarItem.appearance().setTitleTextAttributes(unselectedAttributes, for: .normal)
-        
-        let iconSize = CGSize(width: 16, height: 16)
-        for item in tabBar.items ?? [] {
-            item.image = item.image?.resize(targetSize: iconSize)
-        }
-    }
 }
 
 extension UIImage {

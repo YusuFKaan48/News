@@ -80,6 +80,9 @@ extension ListUpView {
 
         newsFilterButton.layer.cornerRadius = 4
         newsFilterButton.addTarget(self, action: #selector(animateButton2), for: .touchUpInside)
+        
+        
+        backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.04)
     }
     
     func layout() {
@@ -106,8 +109,10 @@ extension ListUpView {
         
         
         NSLayoutConstraint.activate([
-            UpListhStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            UpListhStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+                        UpListhStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+                        UpListhStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+                        UpListhStack.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+                        UpListhStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
     
@@ -140,4 +145,3 @@ extension ListUpView {
         newsFilterButton.setImage(icon, for: .normal)
     }
 }
-
