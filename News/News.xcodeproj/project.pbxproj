@@ -136,6 +136,7 @@
 			children = (
 				D24898F52A90D02D0084C545 /* MainViewController.swift */,
 				D24898FB2A90D3170084C545 /* UIViewController+Utils.swift */,
+				D24898FD2A91E65E0084C545 /* CellView.swift */,
 				D24899052A922B2E0084C545 /* Home */,
 				D205FC672A94B15500398C0B /* Networking */,
 				D24899062A922B4C0084C545 /* Search */,
@@ -149,7 +150,6 @@
 				D24898F72A90D10F0084C545 /* HomeViewController.swift */,
 				D24899012A91F2C70084C545 /* ListUpView.swift */,
 				D24898FF2A91E77C0084C545 /* ListViewController.swift */,
-				D24898FD2A91E65E0084C545 /* CellView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";

@@ -51,7 +51,6 @@ extension OnboardingViewController {
             titleLabel.font = customFont
         } else {
             titleLabel.font = UIFont.systemFont(ofSize: 16)
-            
         }
         
         let letterSpacing: CGFloat = 2.5
