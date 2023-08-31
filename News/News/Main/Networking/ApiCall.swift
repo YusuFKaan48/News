@@ -5,6 +5,13 @@
 //  Created by Yusuf Kaan USTA on 22.08.2023.
 //
 
+//
+//  ApiCall.swift
+//  News
+//
+//  Created by Yusuf Kaan USTA on 22.08.2023.
+//
+
 import Foundation
 
 final class ApiCall {
@@ -64,6 +71,27 @@ final class ApiCall {
         }
         task.resume()
     }
+    
+    public func getTopStoriesByCategory(category: String, completion: @escaping (Result<[Article], Error>) -> Void) {
+            let urlString = "https://newsapi.org/v2/top-headlines?country=us&category=\(category)&apiKey=d7f2a31563784ac2a4cb65735c3c6d77"
+            guard let url = URL(string: urlString) else {
+                return
+            }
+            
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    completion(.failure(error))
+                } else if let data = data {
+                    do {
+                        let result = try JSONDecoder().decode(APIResponse.self, from: data)
+                        completion(.success(result.articles))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
+            }
+            task.resume()
+        }
 }
 
 struct APIResponse: Codable {
@@ -72,13 +100,14 @@ struct APIResponse: Codable {
 
 struct Article: Codable {
     let source: Source
-    let title: String
+    let title: String?
     let description: String?
     let url: String?
     let urlToImage: String?
-    let publishedAt: String
+    let publishedAt: String?
+    let category: String?
 }
 
 struct Source: Codable {
-    let name: String
+    let name: String?
 }

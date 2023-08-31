@@ -140,19 +140,19 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     }
     
     func fetchArticles() {
-        ApiCall.shared.getTopStories { [weak self] result in
-            switch result {
-            case .success(let articles):
-                self?.articles = articles
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                    self?.activityIndicatorView.stopAnimating()
-                    self?.activityIndicatorView.removeFromSuperview()
+            ApiCall.shared.getTopStories { [weak self] result in
+                switch result {
+                case .success(let articles):
+                    self?.articles = articles
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                        self?.activityIndicatorView.stopAnimating()
+                        self?.activityIndicatorView.removeFromSuperview()
+                        self?.refreshControl.endRefreshing()
+                    }
+                case .failure(let error):
+                    print("Error fetching articles:", error)
                     self?.refreshControl.endRefreshing()
-                }
-            case .failure(let error):
-                print("Error fetching articles:", error)
-                self?.refreshControl.endRefreshing()
             }
         }
     }
