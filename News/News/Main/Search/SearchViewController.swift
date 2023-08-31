@@ -32,7 +32,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     }
     
     private func style() {
-        view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
+        view.backgroundColor = UIColor(red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
+
     }
     
     func setupTableView() {
@@ -44,8 +45,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         
         NSLayoutConstraint.activate([
                 tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                 tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
@@ -55,10 +56,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         tableView.layer.cornerRadius = 8
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         tableView.layer.masksToBounds = true
-        tableView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.04)
+        tableView.backgroundColor = UIColor(red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        tableView.separatorColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.2)
+        tableView.separatorColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)
         
         tableView.register(CellView.self, forCellReuseIdentifier: cellReuseIdentifier)
         tableView.selectionFollowsFocus = false

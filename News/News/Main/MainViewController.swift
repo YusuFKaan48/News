@@ -47,7 +47,7 @@ class MainViewController: UITabBarController {
 
     private func setupTabBar() {
             tabBar.tintColor = .white
-            tabBar.unselectedItemTintColor = .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
+            tabBar.unselectedItemTintColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
             tabBar.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
             tabBar.isTranslucent = false
 
@@ -67,7 +67,7 @@ class MainViewController: UITabBarController {
 
             let unselectedAttributes: [NSAttributedString.Key: Any] = [
                 .font: customFont,
-                .foregroundColor: UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
+                .foregroundColor: UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
             ]
 
             UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
@@ -80,7 +80,7 @@ class MainViewController: UITabBarController {
             }
             
             let bottomLineView = UIView()
-            bottomLineView.backgroundColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.2)
+            bottomLineView.backgroundColor = UIColor.init(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)
             bottomLineView.translatesAutoresizingMaskIntoConstraints = false
             tabBar.addSubview(bottomLineView)
 

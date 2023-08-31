@@ -26,7 +26,7 @@ class CellView: UITableViewCell {
     }
 
     func styleUI() {
-        backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.04)
+        backgroundColor = UIColor(red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
         
         contentView.addSubview(hStack)
         hStack.axis = .horizontal
@@ -42,11 +42,11 @@ class CellView: UITableViewCell {
         vStack.addArrangedSubview(newsParagraph)
 
         newsTitle.font = UIFont(name: "Inter-Medium", size: 14)
-        newsTitle.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.8)
+        newsTitle.textColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1.0)
         newsTitle.numberOfLines = 2
 
         newsParagraph.font = UIFont(name: "Inter-Medium", size: 12)
-        newsParagraph.textColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.6)
+        newsParagraph.textColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
         newsParagraph.numberOfLines = 2
         
         newsImage.translatesAutoresizingMaskIntoConstraints = false

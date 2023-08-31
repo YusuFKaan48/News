@@ -51,7 +51,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         UpListhStack.translatesAutoresizingMaskIntoConstraints = false
 
         UpListhStack.axis = .horizontal
-        UpListhStack.spacing = 168
+        UpListhStack.spacing = 188
         
         UpListSecondhStack.axis = .horizontal
         UpListSecondhStack.spacing = 6
@@ -67,16 +67,16 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         newsMainTitle.textAlignment = .center
     
 
-        newsFromButton.setTitle("-From New York Times", for: .normal)
+        newsFromButton.setTitle("-From this country", for: .normal)
         newsFromButton.setTitleColor(.white, for: .normal)
-        newsFromButton.backgroundColor = .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.08)
+        newsFromButton.backgroundColor = .init(red: 47/255, green: 47/255, blue: 47/255, alpha: 1.0)
 
         let newsFromAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: "Inter-Bold", size: 12) ?? UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.8)
+            .foregroundColor: UIColor(red: 213/255, green: 213/255, blue: 213/255, alpha: 1.0)
         ]
 
-        let newsFromAttributedTitle = NSAttributedString(string: "-From New York Times", attributes: newsFromAttributes)
+        let newsFromAttributedTitle = NSAttributedString(string: "-From this country", attributes: newsFromAttributes)
         newsFromButton.setAttributedTitle(newsFromAttributedTitle, for: .normal)
         newsFromButton.layer.cornerRadius = 4
         newsFromButton.addTarget(self, action: #selector(animateButton), for: .touchUpInside)
@@ -88,7 +88,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
 
         newsFilterButton.setTitle("", for: .normal)
         newsFilterButton.setTitleColor(.white, for: .normal)
-        newsFilterButton.backgroundColor = .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.08)
+        newsFilterButton.backgroundColor = .init(red: 47/255, green: 47/255, blue: 47/255, alpha: 1.0)
 
         newsFilterButton.layer.cornerRadius = 4
         newsFilterButton.addTarget(self, action: #selector(animateButton2), for: .touchUpInside)
@@ -153,10 +153,10 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         tableView.layer.cornerRadius = 8
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         tableView.layer.masksToBounds = true
-        tableView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.04)
+        tableView.backgroundColor = UIColor(red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        tableView.separatorColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.2)
+        tableView.separatorColor = UIColor(red: 74/255, green: 74/255, blue: 74/255, alpha: 1.0)
         
         tableView.register(CellView.self, forCellReuseIdentifier: cellReuseIdentifier)
         tableView.selectionFollowsFocus = false
@@ -179,9 +179,45 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             UIView.animate(withDuration: 0.1) {
                 self.newsFromButton.transform = CGAffineTransform.identity
             }
+            self.showCountrySelectionMenu() // Ülke seçim menüsünü göster
         }
         print("Tapped a news from button")
     }
+
+    func showCountrySelectionMenu() {
+        let alertController = UIAlertController(title: "Select Country", message: nil, preferredStyle: .actionSheet)
+        
+        let countries = ["us", "ca", "fr", "de", "jp", "cn", "tr"]
+        
+        for country in countries {
+            let action = UIAlertAction(title: country.uppercased(), style: .default) { [weak self] _ in
+                self?.fetchArticlesByCountry(country: country)
+            }
+            alertController.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func fetchArticlesByCountry(country: String) {
+        ApiCall.shared.getTopStoriesByCountry(country: country) { [weak self] result in
+            switch result {
+            case .success(let articles):
+                self?.articles = articles
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.refreshControl.endRefreshing()
+                }
+            case .failure(let error):
+                print("Error fetching articles:", error)
+                self?.refreshControl.endRefreshing()
+            }
+        }
+    }
+
     
     @objc func animateButton2() {
         UIView.animate(withDuration: 0.1, animations: {
