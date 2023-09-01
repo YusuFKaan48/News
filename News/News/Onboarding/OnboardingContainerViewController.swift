@@ -24,9 +24,9 @@ class OnboardingContainerViewController: UIViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
-        let page1 = OnboardingViewController(onboardImageName: "2", titleText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-        let page2 = OnboardingViewController(onboardImageName: "3", titleText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
-        let page3 = OnboardingViewController(onboardImageName: "1", titleText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
+        let page1 = OnboardingViewController(onboardImageName: "2", titleText: "By using the filter, you have the flexibility to choose your preferred news category, allowing you to access content that aligns with your interests and preferences.")
+        let page2 = OnboardingViewController(onboardImageName: "3", titleText: "You can retrieve the latest news from your selected country by simply clicking the From This Country button.")
+        let page3 = OnboardingViewController(onboardImageName: "1", titleText: "You have the flexibility to search for news articles from various categories across the globe to find the content that interests you.")
 
         pages.append(page1)
         pages.append(page2)

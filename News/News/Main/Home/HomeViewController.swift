@@ -10,7 +10,6 @@ import SafariServices
 
 class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, SFSafariViewControllerDelegate, UIScrollViewDelegate {
 
-    let homeText = UILabel()
     let tableView = UITableView()
     let cellReuseIdentifier = "CellReuseIdentifier"
     var articles: [Article] = []
@@ -21,6 +20,15 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     let newsMainTitle = UILabel()
     let newsFromButton = UIButton()
     let newsFilterButton = UIButton()
+    let countryNames: [String: String] = [
+        "us": "United States",
+        "ca": "Canada",
+        "fr": "France",
+        "de": "Germany",
+        "jp": "Japan",
+        "cn": "China",
+        "tr": "Turkey"
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,16 +45,6 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     private func style() {
         view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1.0)
-
-        if let customFont = UIFont(name: "Inter-Bold", size: 16) {
-            homeText.font = customFont
-        } else {
-            homeText.font = UIFont.systemFont(ofSize: 16)
-        }
-
-        homeText.text = "Home"
-        homeText.textColor = .white
-        homeText.textAlignment = .center
         
         UpListhStack.translatesAutoresizingMaskIntoConstraints = false
 
@@ -66,7 +64,6 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         newsMainTitle.textColor = .white
         newsMainTitle.textAlignment = .center
     
-
         newsFromButton.setTitle("-From this country", for: .normal)
         newsFromButton.setTitleColor(.white, for: .normal)
         newsFromButton.backgroundColor = .init(red: 47/255, green: 47/255, blue: 47/255, alpha: 1.0)
@@ -80,8 +77,6 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         newsFromButton.setAttributedTitle(newsFromAttributedTitle, for: .normal)
         newsFromButton.layer.cornerRadius = 4
         newsFromButton.addTarget(self, action: #selector(animateButton), for: .touchUpInside)
-        
-
        
         let filterIcon = UIImage(named: "filter-list")
         newsFilterButton.setImage(filterIcon, for: .normal)
@@ -95,17 +90,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
 
     private func layout() {
-        view.addSubview(homeText)
         view.addSubview(UpListhStack)
-        
-
-        homeText.translatesAutoresizingMaskIntoConstraints = false
-       
-
-        NSLayoutConstraint.activate([
-            homeText.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            homeText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        ])
           
         UpListhStack.addArrangedSubview(UpListSecondhStack)
         UpListhStack.addArrangedSubview(newsFilterButton)
@@ -116,23 +101,123 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
         UpListhStack.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
-        
-           let minWidthConstraint = newsFilterButton.widthAnchor.constraint(equalToConstant: 24)
-           minWidthConstraint.priority = .required
-           minWidthConstraint.isActive = true
+        let minWidthConstraint = newsFilterButton.widthAnchor.constraint(equalToConstant: 24)
+        minWidthConstraint.priority = .required
+        minWidthConstraint.isActive = true
            
-           let minHeightConstraint = newsFilterButton.heightAnchor.constraint(equalToConstant: 24)
-           minHeightConstraint.priority = .required
-           minHeightConstraint.isActive = true
-        
-        
+        let minHeightConstraint = newsFilterButton.heightAnchor.constraint(equalToConstant: 24)
+        minHeightConstraint.priority = .required
+        minHeightConstraint.isActive = true
         
         NSLayoutConstraint.activate([
-            UpListhStack.topAnchor.constraint(equalTo: homeText.bottomAnchor, constant: 16),
+            UpListhStack.topAnchor.constraint(equalTo: view.topAnchor),
             UpListhStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             UpListhStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
         ])
     }
+    
+    // Country Selection
+    
+    @objc func animateButton() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.newsFromButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }) { _ in
+            UIView.animate(withDuration: 0.1) {
+                self.newsFromButton.transform = CGAffineTransform.identity
+            }
+            self.showCountrySelectionMenu()
+        }
+        print("Tapped a news from button")
+    }
+
+    func showCountrySelectionMenu() {
+        let alertController = UIAlertController(title: "Select Country", message: nil, preferredStyle: .actionSheet)
+        
+        for (countryCode, countryName) in countryNames {
+            let action = UIAlertAction(title: countryName, style: .default) { [weak self] _ in
+                self?.fetchArticlesByCountry(country: countryCode)
+            }
+            alertController.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func fetchArticlesByCountry(country: String) {
+        ApiCall.shared.getTopStoriesByCountry(country: country) { [weak self] result in
+            switch result {
+            case .success(let articles):
+                let validArticles = articles.filter { $0.url != nil && URL(string: $0.url!) != nil }
+                self?.articles = validArticles
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.refreshControl.endRefreshing()
+                }
+            case .failure(let error):
+                print("Error fetching articles:", error)
+                self?.refreshControl.endRefreshing()
+            }
+        }
+    }
+    
+    // Category Selection
+    
+    @objc func animateButton2() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.newsFilterButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }) { _ in
+            UIView.animate(withDuration: 0.1) {
+                self.newsFilterButton.transform = CGAffineTransform.identity
+            }
+            self.showCategorySelectionMenu()
+        }
+        print("Tapped a filter icon")
+    }
+
+    func showCategorySelectionMenu() {
+        let alertController = UIAlertController(title: "Select Category", message: nil, preferredStyle: .actionSheet)
+        
+        let categories = ["business", "entertainment", "general", "health", "science", "sports", "technology"]
+        
+        for category in categories {
+            let action = UIAlertAction(title: category.capitalized, style: .default) { [weak self] _ in
+                self?.fetchArticlesByCategory(category: category)
+            }
+            alertController.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func fetchArticlesByCategory(category: String) {
+        ApiCall.shared.getTopStoriesByCategory(category: category) { [weak self] result in
+            switch result {
+            case .success(let articles):
+                let validArticles = articles.filter { $0.url != nil && URL(string: $0.url!) != nil }
+                self?.articles = validArticles
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.refreshControl.endRefreshing()
+                }
+            case .failure(let error):
+                print("Error fetching articles:", error)
+                self?.refreshControl.endRefreshing()
+            }
+        }
+    }
+
+    
+    func set(icon: UIImage?, title: String) {
+           newsFilterButton.setImage(icon, for: .normal)
+    }
+    
+    // Table View
     
     func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -171,104 +256,6 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
     }
-    
-    @objc func animateButton() {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.newsFromButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }) { _ in
-            UIView.animate(withDuration: 0.1) {
-                self.newsFromButton.transform = CGAffineTransform.identity
-            }
-            self.showCountrySelectionMenu() // Ülke seçim menüsünü göster
-        }
-        print("Tapped a news from button")
-    }
-
-    func showCountrySelectionMenu() {
-        let alertController = UIAlertController(title: "Select Country", message: nil, preferredStyle: .actionSheet)
-        
-        let countries = ["us", "ca", "fr", "de", "jp", "cn", "tr"]
-        
-        for country in countries {
-            let action = UIAlertAction(title: country.uppercased(), style: .default) { [weak self] _ in
-                self?.fetchArticlesByCountry(country: country)
-            }
-            alertController.addAction(action)
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-
-    func fetchArticlesByCountry(country: String) {
-        ApiCall.shared.getTopStoriesByCountry(country: country) { [weak self] result in
-            switch result {
-            case .success(let articles):
-                self?.articles = articles
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                    self?.refreshControl.endRefreshing()
-                }
-            case .failure(let error):
-                print("Error fetching articles:", error)
-                self?.refreshControl.endRefreshing()
-            }
-        }
-    }
-
-    
-    @objc func animateButton2() {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.newsFilterButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }) { _ in
-            UIView.animate(withDuration: 0.1) {
-                self.newsFilterButton.transform = CGAffineTransform.identity
-            }
-            self.showCategorySelectionMenu()
-        }
-        print("Tapped a filter icon")
-    }
-
-    func showCategorySelectionMenu() {
-        let alertController = UIAlertController(title: "Select Category", message: nil, preferredStyle: .actionSheet)
-        
-        let categories = ["business", "entertainment", "general", "health", "science", "sports", "technology"]
-        
-        for category in categories {
-            let action = UIAlertAction(title: category.capitalized, style: .default) { [weak self] _ in
-                self?.fetchArticlesByCategory(category: category)
-            }
-            alertController.addAction(action)
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-
-    func fetchArticlesByCategory(category: String) {
-        ApiCall.shared.getTopStoriesByCategory(category: category) { [weak self] result in
-            switch result {
-            case .success(let articles):
-                self?.articles = articles
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                    self?.refreshControl.endRefreshing()
-                }
-            case .failure(let error):
-                print("Error fetching articles:", error)
-                self?.refreshControl.endRefreshing()
-            }
-        }
-    }
-
-    
-    func set(icon: UIImage?, title: String) {
-           newsFilterButton.setImage(icon, for: .normal)
-       }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
@@ -310,21 +297,21 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     func fetchArticles() {
-            ApiCall.shared.getTopStories { [weak self] result in
-                switch result {
-                case .success(let articles):
-                    self?.articles = articles
-                    DispatchQueue.main.async {
-                        self?.tableView.reloadData()
-                        self?.activityIndicatorView.stopAnimating()
-                        self?.activityIndicatorView.removeFromSuperview()
-                        self?.refreshControl.endRefreshing()
-                    }
-                case .failure(let error):
-                    print("Error fetching articles:", error)
+        ApiCall.shared.getTopStories { [weak self] result in
+            switch result {
+            case .success(let articles):
+                let validArticles = articles.filter { $0.url != nil && URL(string: $0.url!) != nil }
+                self?.articles = validArticles
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.activityIndicatorView.stopAnimating()
+                    self?.activityIndicatorView.removeFromSuperview()
                     self?.refreshControl.endRefreshing()
                 }
+            case .failure(let error):
+                print("Error fetching articles:", error)
+                self?.refreshControl.endRefreshing()
             }
         }
-
+    }
 }

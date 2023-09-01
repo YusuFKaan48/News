@@ -12,7 +12,6 @@ class CellView: UITableViewCell {
     let newsImage = UIImageView()
     let vStack = UIStackView()
     let newsTitle = UILabel()
-    let newsParagraph = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,18 +35,13 @@ class CellView: UITableViewCell {
         hStack.addArrangedSubview(vStack)
 
         vStack.axis = .vertical
-        vStack.spacing = 4 
+        vStack.spacing = 4
         
         vStack.addArrangedSubview(newsTitle)
-        vStack.addArrangedSubview(newsParagraph)
-
-        newsTitle.font = UIFont(name: "Inter-Medium", size: 14)
+    
+       newsTitle.font = UIFont(name: "Inter-Medium", size: 16)
         newsTitle.textColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1.0)
-        newsTitle.numberOfLines = 2
-
-        newsParagraph.font = UIFont(name: "Inter-Medium", size: 12)
-        newsParagraph.textColor = UIColor(red: 165/255, green: 165/255, blue: 165/255, alpha: 1.0)
-        newsParagraph.numberOfLines = 2
+        newsTitle.numberOfLines = 3
         
         newsImage.translatesAutoresizingMaskIntoConstraints = false
         newsImage.widthAnchor.constraint(equalToConstant: 80).isActive = true
@@ -69,9 +63,8 @@ class CellView: UITableViewCell {
     }
 
     func configure(with article: Article) {
+        self.newsImage.isHidden = false
         newsTitle.text = article.title
-        newsParagraph.text = article.description
-
         if let imageURLString = article.urlToImage, let imageURL = URL(string: imageURLString) {
             URLSession.shared.dataTask(with: imageURL) { [weak self] data, response, error in
                 if let error = error {
@@ -83,7 +76,9 @@ class CellView: UITableViewCell {
                 }
             }.resume()
         } else {
-            self.newsImage.image = UIImage(named: "placeholder")
+            DispatchQueue.main.async {
+                self.newsImage.isHidden = true
+            }
         }
     }
 }

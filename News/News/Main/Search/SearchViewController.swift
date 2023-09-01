@@ -33,8 +33,38 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     
     private func style() {
         view.backgroundColor = UIColor(red: 29/255, green: 29/255, blue: 29/255, alpha: 1.0)
-
     }
+    
+    // Seach Bar
+    
+    private func setupSearchBar() {
+        navigationItem.searchController = searchVC
+        searchVC.searchBar.delegate = self
+        searchVC.searchBar.setShowsCancelButton(false, animated: false)
+        searchVC.hidesNavigationBarDuringPresentation = false
+        }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        guard let searchText = searchBar.text, !searchText.isEmpty else {
+            return
+        }
+        
+        ApiCall.shared.search(with: searchText) { [weak self] result in
+            switch result {
+            case .success(let articles):
+                let validArticles = articles.filter { $0.url != nil && URL(string: $0.url!) != nil }
+                self?.articles = validArticles
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Error searching the articles:", error)
+            }
+        }
+    }
+    
+    // Table View
     
     func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +72,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         view.addSubview(tableView)
         view.addSubview(searchBar)
         view.addSubview(activityIndicatorView)
-        
+            
         NSLayoutConstraint.activate([
                 tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
                 tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -73,32 +103,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshTable), for: .valueChanged)
-    }
-    
-    private func setupSearchBar() {
-        navigationItem.searchController = searchVC
-        searchVC.searchBar.delegate = self
-        searchVC.searchBar.setShowsCancelButton(false, animated: false)
-        searchVC.hidesNavigationBarDuringPresentation = false
-        }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        guard let searchText = searchBar.text, !searchText.isEmpty else {
-            return
-        }
-        
-        ApiCall.shared.search(with: searchText) { [weak self] result in
-            switch result {
-            case .success(let articles):
-                self?.articles = articles
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
-            case .failure(let error):
-                print("Error searching the articles:", error)
-            }
-        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -144,7 +148,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
             ApiCall.shared.getTopStories { [weak self] result in
                 switch result {
                 case .success(let articles):
-                    self?.articles = articles
+                    let validArticles = articles.filter { $0.url != nil && URL(string: $0.url!) != nil }
+                    self?.articles = validArticles
                     DispatchQueue.main.async {
                         self?.tableView.reloadData()
                         self?.activityIndicatorView.stopAnimating()

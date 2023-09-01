@@ -17,6 +17,8 @@ final class ApiCall {
     
     private init() {}
     
+    // Top Stories
+    
     public func getTopStories(completion: @escaping (Result<[Article], Error>) -> Void) {
         guard let url = Constants.topHeadlinesURL else {
             return
@@ -38,6 +40,8 @@ final class ApiCall {
         }
         task.resume()
     }
+    
+    // Search
     
     public func search(with query: String, completion: @escaping (Result<[Article], Error>) -> Void) {
         guard !query.trimmingCharacters(in: .whitespaces).isEmpty else {
@@ -65,6 +69,8 @@ final class ApiCall {
         task.resume()
     }
     
+    // Category
+    
     public func getTopStoriesByCategory(category: String, completion: @escaping (Result<[Article], Error>) -> Void) {
             let urlString = "https://newsapi.org/v2/top-headlines?country=us&category=\(category)&apiKey=d7f2a31563784ac2a4cb65735c3c6d77"
             guard let url = URL(string: urlString) else {
@@ -85,6 +91,9 @@ final class ApiCall {
             }
             task.resume()
         }
+    
+    // Country
+    
     public func getTopStoriesByCountry(country: String, completion: @escaping (Result<[Article], Error>) -> Void) {
             let urlString = "https://newsapi.org/v2/top-headlines?country=\(country)&apiKey=d7f2a31563784ac2a4cb65735c3c6d77"
             guard let url = URL(string: urlString) else {
@@ -105,7 +114,6 @@ final class ApiCall {
             }
             task.resume()
         }
-
 }
 
 struct APIResponse: Codable {
