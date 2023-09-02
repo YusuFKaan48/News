@@ -49,10 +49,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         UpListhStack.translatesAutoresizingMaskIntoConstraints = false
 
         UpListhStack.axis = .horizontal
-        UpListhStack.spacing = 188
         
         UpListSecondhStack.axis = .horizontal
-        UpListSecondhStack.spacing = 6
+        UpListSecondhStack.spacing = 16
         
         if let customFont = UIFont(name: "Inter-Bold", size: 24) {
             newsMainTitle.font = customFont
@@ -62,19 +61,14 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         
         newsMainTitle.text = "News"
         newsMainTitle.textColor = .white
-        newsMainTitle.textAlignment = .center
     
-        newsFromButton.setTitle("-From this country", for: .normal)
+        let countryIcon = UIImage(named: "globe")
+        newsFromButton.setImage(countryIcon, for: .normal)
+
+        newsFromButton.setTitle("", for: .normal)
         newsFromButton.setTitleColor(.white, for: .normal)
         newsFromButton.backgroundColor = .init(red: 47/255, green: 47/255, blue: 47/255, alpha: 1.0)
 
-        let newsFromAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Inter-Bold", size: 12) ?? UIFont.systemFont(ofSize: 12),
-            .foregroundColor: UIColor(red: 213/255, green: 213/255, blue: 213/255, alpha: 1.0)
-        ]
-
-        let newsFromAttributedTitle = NSAttributedString(string: "-From this country", attributes: newsFromAttributes)
-        newsFromButton.setAttributedTitle(newsFromAttributedTitle, for: .normal)
         newsFromButton.layer.cornerRadius = 4
         newsFromButton.addTarget(self, action: #selector(animateButton), for: .touchUpInside)
        
@@ -90,16 +84,18 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
 
     private func layout() {
-        view.addSubview(UpListhStack)
+        view.addSubview(UpListSecondhStack)
           
-        UpListhStack.addArrangedSubview(UpListSecondhStack)
-        UpListhStack.addArrangedSubview(newsFilterButton)
-        UpListSecondhStack.addArrangedSubview(newsMainTitle)
-        UpListSecondhStack.addArrangedSubview(newsFromButton)
         
+        UpListhStack.addArrangedSubview(newsMainTitle)
+        UpListSecondhStack.addArrangedSubview(UpListhStack)
+        UpListSecondhStack.addArrangedSubview(newsFromButton)
+        UpListSecondhStack.addArrangedSubview(newsFilterButton)
+        
+        UpListSecondhStack.translatesAutoresizingMaskIntoConstraints = false
         UpListhStack.translatesAutoresizingMaskIntoConstraints = false
         
-        UpListhStack.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        UpListSecondhStack.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         let minWidthConstraint = newsFilterButton.widthAnchor.constraint(equalToConstant: 24)
         minWidthConstraint.priority = .required
@@ -110,9 +106,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         minHeightConstraint.isActive = true
         
         NSLayoutConstraint.activate([
-            UpListhStack.topAnchor.constraint(equalTo: view.topAnchor),
-            UpListhStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            UpListhStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            UpListSecondhStack.topAnchor.constraint(equalTo: view.topAnchor),
+            UpListSecondhStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            UpListSecondhStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
         ])
     }
     

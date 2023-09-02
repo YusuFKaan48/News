@@ -39,7 +39,7 @@ class CellView: UITableViewCell {
         
         vStack.addArrangedSubview(newsTitle)
     
-       newsTitle.font = UIFont(name: "Inter-Medium", size: 16)
+        newsTitle.font = UIFont(name: "Inter-Medium", size: 16)
         newsTitle.textColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1.0)
         newsTitle.numberOfLines = 3
         
