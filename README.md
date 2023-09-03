@@ -11,7 +11,7 @@ The news app, designed with a minimalist approach, not only delivers global news
 
 # Welcome Part
 
-The LoginView is a login screen that utilizes the protocol-delegate pattern to handle the login event. When the user logs in for the first time, it requests the location information. Once the location is provided, the user is directed to the main application. Subsequent logins will directly redirect the user to the main application without requiring location input again. This functionality is achieved using User Defaults to store the location data.
+When a user logs in for the first time, they are presented with the onboarding experience. After this initial display is complete, the user is automatically redirected to the main app upon subsequent logins. This seamless functionality is made possible through the use of User Defaults.
 
 First time example:
 
