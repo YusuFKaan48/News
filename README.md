@@ -32,6 +32,13 @@ Pull to refresh example:
 
 <img src="https://github.com/YusuFKaan48/News/assets/111217286/dc81e7ff-e58b-4a4d-8526-f2f75fd957a0" alt="GIF Caption" width="215" height="466">
 
+# Retrieve news for a specific country part
+
+When you tap the world icon, a list of countries will appear, enabling you to choose the countries from which you'd like to receive the latest news. If you want to get news from all over the world again, just use the pull-to-refresh feature.
+
+Switch the country example:
+
+<img src="https://github.com/YusuFKaan48/News/assets/111217286/365ec377-b940-4548-80da-304b79a06184" alt="GIF Caption" width="215" height="466">
 
 
 
