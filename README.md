@@ -13,12 +13,25 @@ The news app, designed with a minimalist approach, not only delivers global news
 
 When a user logs in for the first time, they are presented with the onboarding experience. After this initial display is complete, the user is automatically redirected to the main app upon subsequent logins. This seamless functionality is made possible through the use of User Defaults.
 
-First time example:
+First-time example:
 
 <img src="https://github.com/YusuFKaan48/News/assets/111217286/3342bdd1-7ed7-4362-b26b-5fe1a3ac9730" alt="GIF Caption" width="215" height="466">
 
 
-Second time example:
+Second-time example:
 
 
 <img src="https://github.com/YusuFKaan48/News/assets/111217286/e87dc7c2-e143-430b-b538-de3c6a15a841" alt="GIF Caption" width="215" height="466">
+
+
+# Pull to refresh part
+
+When the user wants to see the latest news or reset the search results, simply pull to refresh.
+
+Pull to refresh example:
+
+<img src="https://github.com/YusuFKaan48/News/assets/111217286/dc81e7ff-e58b-4a4d-8526-f2f75fd957a0" alt="GIF Caption" width="215" height="466">
+
+
+
+
