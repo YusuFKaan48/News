@@ -20,4 +20,5 @@ First time example:
 
 Second time example:
 
-<img src="https://github.com/YusuFKaan48/News/assets/111217286/46abfa60-1619-4d49-bcc0-108336ac9827" alt="GIF Caption" width="215" height="466">
+
+<img src="https://github.com/YusuFKaan48/News/assets/111217286/e87dc7c2-e143-430b-b538-de3c6a15a841" alt="GIF Caption" width="215" height="466">
