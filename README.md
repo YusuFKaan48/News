@@ -56,8 +56,7 @@ To start a search, click on the search icon in the tab bar to navigate to the se
 
 Search example:
 
-<img src="https://github.com/YusuFKaan48/News/assets/111217286/a9606f68-a7fc-40a5-b485-fbe4bef03acd" alt="GIF Caption" width="215" height="466">
-
+<img src="https://github.com/YusuFKaan48/News/assets/111217286/5493066f-3279-4641-b7e1-40fcda9eb515" alt="GIF Caption" width="215" height="466">
 
 
 
