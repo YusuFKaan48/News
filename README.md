@@ -59,4 +59,10 @@ Search example:
 <img src="https://github.com/YusuFKaan48/News/assets/111217286/5493066f-3279-4641-b7e1-40fcda9eb515" alt="GIF Caption" width="215" height="466">
 
 
+# Reading news part
 
+After clicking on it to read the news, the program checks whether the URL is empty. If it is not empty, it redirects to the news page using the Safari View Controller.
+
+Read news example:
+
+<img src="https://github.com/YusuFKaan48/News/assets/111217286/5493066f-3279-4641-b7e1-40fcda9eb515" alt="GIF Caption" width="215" height="466">
