@@ -50,4 +50,14 @@ Switch the category example:
 <img src="https://github.com/YusuFKaan48/News/assets/111217286/a9606f68-a7fc-40a5-b485-fbe4bef03acd" alt="GIF Caption" width="215" height="466">
 
 
+# Search part
+
+To start a search, click on the search icon in the tab bar to navigate to the search page. Once there, you can click on the search bar and enter your desired query. To reset the results, simply use the pull-to-refresh feature.
+
+Search example:
+
+<img src="https://github.com/YusuFKaan48/News/assets/111217286/a9606f68-a7fc-40a5-b485-fbe4bef03acd" alt="GIF Caption" width="215" height="466">
+
+
+
 
