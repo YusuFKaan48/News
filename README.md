@@ -65,4 +65,5 @@ After clicking on it to read the news, the program checks whether the URL is emp
 
 Read news example:
 
-<img src="https://github.com/YusuFKaan48/News/assets/111217286/5493066f-3279-4641-b7e1-40fcda9eb515" alt="GIF Caption" width="215" height="466">
+<img src="https://github.com/YusuFKaan48/News/assets/111217286/ecf314ea-1230-40fd-9745-8763af8e2917" alt="GIF Caption" width="215" height="466">
+
